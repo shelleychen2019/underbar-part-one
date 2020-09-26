@@ -515,7 +515,7 @@
           return value === 3;
         };
 
-        expect(_.uniq(mySorted, myIter)).to.deep.equal([1, 3]);
+        expect(_.uniq(mySorted, myIter)).to.deep.equal([3]);
       });
 
       //it should expect our result to be an array

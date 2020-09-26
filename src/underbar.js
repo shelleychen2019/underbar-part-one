@@ -111,21 +111,38 @@
         return -1;
       }
     }
+    /* END SOLUTION */
+  };
 
+  _.findIndex = function (array, test) {
+    /* START SOLUTION */
 
+    for (var i = 0; i < array.length; i++) {
+      if (test == undefined) {
+        _.identity(array);
+        return array
+      }
+
+      else if (test(array[i])) {
+        return i;
+      }
+      else if (i == array.length - 1) {
+        return -1;
+      }
+    }
     /* END SOLUTION */
   };
 
   // Return all elements of an array that pass a truth test.
   _.filter = function (collection, test) {
     /* START SOLUTION */
-    var array = []
+    var arr = []
     for (var i = 0; i < collection.length; i++) {
       if (test(collection[i])) {
-        array.push(collection[i])
+        arr.push(collection[i])
       }
     };
-    return array;
+    return arr;
   }
   /* END SOLUTION */
 
@@ -146,7 +163,15 @@
   // Produce a duplicate-free version of the array.
   _.uniq = function (array, isSorted, iterator) {
     /* START SOLUTION */
-
+    var arr = []
+    for (var i = 0; i < array.length; i++) {
+      if (array[i] !== array[i + 1]) {
+        arr.push(array[i])
+      }
+    }
+    // return _.filter(arr, iterator);
+    return arr;
+    // _.filter(array, _.indexOf(array, target) === index)
     /* END SOLUTION */
   };
 
@@ -155,6 +180,24 @@
   _.map = function (collection, iterator) {
     /* START SOLUTION */
 
+    // var array2 = []
+    // for (var i = 0; i< collection.length; i++){
+    //   array2.push('element: '+ collection[i] + '| idx: ' + i)
+    // }
+    // return array2
+    if (!Array.isArray(collection)) {
+      var array = [];
+      for (var key in collection) {
+        array.push(iterator(collection[key]))
+      }
+      return array;
+    }
+    var array = []
+    for (var i = 0; i < collection.length; i++) {
+      var letter = collection[i];
+      array.push(iterator(collection[i], i))
+    }
+    return array
     /* END SOLUTION */
   };
 
