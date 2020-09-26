@@ -30,15 +30,15 @@
     /* START SOLUTION */
     //cannot pass an object. no second argument
     //is type of undefined is undefined when n is undefined, 'undefined' is a string
-    if (!(Array.isArray(array)) && n === undefined){
+    if (!(Array.isArray(array)) && n === undefined) {
       return undefined
     }
     //cannot pass an object with a second argument
-    if (!Array.isArray(array) && typeof(n) === 'number'){
+    if (!Array.isArray(array) && typeof (n) === 'number') {
       return [];
     }
     //undefined is also not a number and will return wrong thing
-    if (typeof(n) !== 'number' && !Array.isArray (array)){
+    if (typeof (n) !== 'number' && !Array.isArray(array)) {
       return [];
     }
     // if array passed with no arguments
@@ -46,7 +46,7 @@
       return array[0]
     }
     else {
-    //slice includes first index, doesn't include second index
+      //slice includes first index, doesn't include second index
       return array.slice(0, n)
     }
     // Don't worry if slice is bigger than the array length. It will just work, and also always return a copy of the array instead of the array itself.
@@ -59,15 +59,15 @@
   // last element.
   _.last = function (array, n) {
     /* START SOLUTION */
- if (n === undefined){
-   return array[array.length-1]
- } else if (n <= 0) {
-   return []
- } else if (n > array.length){
-   return array
- } else {
-   return array.slice(array.length - n, array.length)
- }
+    if (n === undefined) {
+      return array[array.length - 1]
+    } else if (n <= 0) {
+      return []
+    } else if (n > array.length) {
+      return array
+    } else {
+      return array.slice(array.length - n, array.length)
+    }
     /* END SOLUTION */
   };
 
@@ -78,17 +78,17 @@
   // iterator function over each item in the input collection.
   _.each = function (collection, iterator) {
     /* START SOLUTION */
-    if (Array.isArray(collection)){
-      for (var i = 0; i < collection.length; i++){
-      iterator(collection[i], i, collection);
+    if (Array.isArray(collection)) {
+      for (var i = 0; i < collection.length; i++) {
+        iterator(collection[i], i, collection);
       }
     }
 
     else {
-      for (var key in collection){
-      iterator(collection[key], key, collection)
+      for (var key in collection) {
+        iterator(collection[key], key, collection)
+      }
     }
-  }
     /* END SOLUTION */
   };
 
@@ -96,18 +96,18 @@
   // is not present in the array.
   _.indexOf = function (array, target, start) {
     /* START SOLUTION */
-   
-    for (var i = start; i < array.length; i++){
-      if (array[i] === target){
-      return i;
-      }
-    }
-    
-    for (var i=0; i < array.length; i++){
-      if (array[i] === target){
+
+    for (var i = start; i < array.length; i++) {
+      if (array[i] === target) {
         return i;
       }
-      else if (i == array.length -1){
+    }
+
+    for (var i = 0; i < array.length; i++) {
+      if (array[i] === target) {
+        return i;
+      }
+      else if (i == array.length - 1) {
         return -1;
       }
     }
@@ -119,9 +119,16 @@
   // Return all elements of an array that pass a truth test.
   _.filter = function (collection, test) {
     /* START SOLUTION */
+    var array = []
+    for (var i = 0; i < collection.length; i++) {
+      if (test(collection[i])) {
+        array.push(collection[i])
+      }
+    };
+    return array;
+  }
+  /* END SOLUTION */
 
-    /* END SOLUTION */
-  };
 
   // Return all elements of an array that don't pass a truth test.
   _.reject = function (collection, test) {
