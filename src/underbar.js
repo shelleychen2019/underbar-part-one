@@ -133,7 +133,13 @@
   // Return all elements of an array that don't pass a truth test.
   _.reject = function (collection, test) {
     /* START SOLUTION */
-
+    var array = []
+    for (var i = 0; i < collection.length; i++) {
+      if (!test(collection[i])) {
+        array.push(collection[i])
+      }
+    };
+    return array;
     /* END SOLUTION */
   };
 
