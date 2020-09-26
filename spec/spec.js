@@ -326,8 +326,9 @@
       //compare those times
       //compare isSorted time < notSorted time
       it('should execute faster when passed true for isSorted parameter and array is freaking huge', function() {
-        var bigArr = _.range(10000000);
+        // var bigArr = _.range(10000000);
         var t0 = performance.now();
+        console.log(performance.now())
         _.indexOf(bigArr, 4526290);
         var t1 = performance.now();
         _.indexOf(bigArr, 4526290, true);

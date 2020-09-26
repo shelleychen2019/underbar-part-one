@@ -28,39 +28,20 @@
 
   _.first = function (array, n) {
     /* START SOLUTION */
-    // var array = arguments[0]; 
-    //   var n = arguments.length > 1 ? arguments[1] : undefined; // If there's only the "array" argument ("n" is not provided), set "n" to 1
-    //   // And now your code, which has nice checks just in case the values are invalid
-
-  // it('Argument can not be passed as object', function() {
-  //   expect(_.first({ plantName: 'caccicity' })).to.equal(undefined);
-  // });
-
-    if (typeof (array) === 'object' && !Array.isArray(array) && typeof (n) == 'number') {
+    //cannot pass an object. no second argument
+    //is type of undefined is undefined when n is undefined, 'undefined' is a string
+    if (!(Array.isArray(array)) && n === undefined){
+      return undefined
+    }
+    //cannot pass an object with a second argument
+    if (!Array.isArray(array) && typeof(n) === 'number'){
       return [];
     }
-
-  // it('Returns empty array if object is passed with a second argument', function() {
-  //   expect(_.first({ plantName: 'caccicity' }, 4)).to.deep.equal([]);
-  // });
-    if (typeof (array) === 'object' && !Array.isArray(array)) {
-      return undefined;
-    }
-  // it('Returns empty array if second argument is invalid', function() {
-  //   expect(_.first('Any String', 'Elle')).to.deep.equal([]);
-  //   expect(_.first([], 2)).to.deep.equal([]);
-  // });
-    //cannot have invalid type for n
-    //cannot have empty array and n
-    // n doesn't have to be a number because of forced type conversion
-
-    if (array.length == 0 && n > 0 | !Array.isArray(array)| (Number(n)) == NaN| n < 0) {
+    //undefined is also not a number and will return wrong thing
+    if (typeof(n) !== 'number' && !Array.isArray (array)){
       return [];
     }
-    // if (array.length == 0 && n > 0 | !Array.isArray(array)| (Number(n)) == NaN| n < 0) {
-    //   return [];
-    // }
-
+    // if array passed with no arguments
     if (n === undefined) {
       return array[0]
     }
@@ -97,16 +78,40 @@
   // iterator function over each item in the input collection.
   _.each = function (collection, iterator) {
     /* START SOLUTION */
-    for (i = 1; i < collection.length; i++){
-      iterator(collection[i]);
+    if (Array.isArray(collection)){
+      for (var i = 0; i < collection.length; i++){
+      iterator(collection[i], i, collection);
+      }
     }
+
+    else {
+      for (var key in collection){
+      iterator(collection[key], key, collection)
+    }
+  }
     /* END SOLUTION */
   };
 
   // Returns the index at which value can be found in the array, or -1 if value
   // is not present in the array.
-  _.indexOf = function (array, target) {
+  _.indexOf = function (array, target, start) {
     /* START SOLUTION */
+   
+    for (var i = start; i < array.length; i++){
+      if (array[i] === target){
+      return i;
+      }
+    }
+    
+    for (var i=0; i < array.length; i++){
+      if (array[i] === target){
+        return i;
+      }
+      else if (i == array.length -1){
+        return -1;
+      }
+    }
+
 
     /* END SOLUTION */
   };
