@@ -215,8 +215,8 @@
     // values into a new array of values. _.pluck() is solved for you
     // as an example of this.
     /* START SOLUTION */
-    return _.map(collection, function(key){
-      return collection[i][key];
+    return _.map(collection, function(collection){
+      return collection[key];
     }
   )
     /* END SOLUTION */
