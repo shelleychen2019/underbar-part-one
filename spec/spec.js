@@ -326,7 +326,8 @@
       //compare those times
       //compare isSorted time < notSorted time
       it('should execute faster when passed true for isSorted parameter and array is freaking huge', function() {
-        // var bigArr = _.range(10000000);
+        console.log('shelley', _.range)
+        var bigArr = _.range(10000000);
         var t0 = performance.now();
         console.log(performance.now())
         _.indexOf(bigArr, 4526290);
@@ -515,7 +516,8 @@
           return value === 3;
         };
 
-        expect(_.uniq(mySorted, myIter)).to.deep.equal([3]);
+        // [false, false, false, false, fales, true, true, true,false, false]
+        expect(_.uniq(mySorted, true, myIter)).to.deep.equal([1, 3]);
       });
 
       //it should expect our result to be an array

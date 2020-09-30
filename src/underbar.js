@@ -163,14 +163,53 @@
   // Produce a duplicate-free version of the array.
   _.uniq = function (array, isSorted, iterator) {
     /* START SOLUTION */
-    var arr = []
-    for (var i = 0; i < array.length; i++) {
-      if (array[i] !== array[i + 1]) {
-        arr.push(array[i])
+    //if (isSorted && iterator == undefined)
+    var uniqArr = []
+    if (iterator == undefined) {
+
+      for (var i = 0; i < array.length; i++) {
+        if (array[i] !== array[i + 1]) {
+          uniqArr.push(array[i])
+        }
       }
+      return uniqArr;
+    }
+    //if (isSorted  == false && iterator == undefined)
+    // else if (isSorted  == false && iterator == undefined){
+
+    // }
+
+    //if isSorted 
+    else if (isSorted) {
+      var itr = _.map(array, iterator) //true falses
+      var arr2 = []
+      var indexTrue = itr.indexOf(true)
+      var indexFalse = itr.indexOf(false)
+      if (indexTrue > indexFalse){
+        arr2.push(array[indexFalse]) //check the parenthesis, and false is boolean not string
+        arr2.push(array[indexTrue])
+      }
+      else {
+        arr2.push(array[indexTrue]) //check the parenthesis, and false is boolean not string
+        arr2.push(array[indexFalse])
+      }
+      
+      return arr2;
+      // for (var i = 0; i < itr.length; i++){
+      //   if (itr[i]==false){
+      //     result.push(sorted_arr[i])
+      //   }
+      // }
+    }
+
+    else {
+      var itr = _.map(array, iterator)
+      var arr2 = []
+      arr2.push(array[itr.indexOf(false)])
+      arr2.push(array[itr.indexOf(true)])
+      return arr2;
     }
     // return _.filter(arr, iterator);
-    return arr;
     // _.filter(array, _.indexOf(array, target) === index)
     /* END SOLUTION */
   };
@@ -215,10 +254,10 @@
     // values into a new array of values. _.pluck() is solved for you
     // as an example of this.
     /* START SOLUTION */
-    return _.map(collection, function(collection){
+    return _.map(collection, function (collection) {
       return collection[key];
     }
-  )
+    )
     /* END SOLUTION */
   };
 
@@ -235,7 +274,42 @@
   _.reduce = function (collection, iterator, accumulator) {
     /* START SOLUTION */
 
-    /* END SOLUTION */
+    for (var i = 0; i < collection.length; i++) {
+      if (accumulator == undefined) {
+        accumulator = collection[i]
+        // accumulator = iterator(accumulator, collection[i + 1])
+        //this is redundant because of the logic of the else
+      }
+      else {
+        accumulator = iterator(accumulator, collection[i])
+      }
+    }
+    return accumulator
   };
+  /* END SOLUTION */
+
 
 }());
+
+// function solution(N, A) {
+//   // write your code in JavaScript (Node.js 8.9.4)
+//    (arr = []).length = N ; 
+//    var count = arr.fill(0)
+
+//     for (var i = 0; i < A.length; i++){
+//       if (A[i] < N){
+//     count[A[i]-1] += 1
+//      console.log(count)
+//       }
+
+//     else {
+//         count = arr.fill(count.reduce(function(a,b)
+//         {return Math.max(a,b);}
+//         ))
+//       }
+//    }
+//    return count
+// }
+
+
+//   console.log(solution(5, [3, 4, 4, 6, 1, 4, 4]))
